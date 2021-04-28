@@ -2,9 +2,9 @@ import RPi.GPIO as GPIO
 import time
 
 class UltrasonicSensor():
-    ''' trig represent the trigger pin,
-        echo represent the echo pin,
-        signal_time represent the time for each signal burst to be sent
+    ''' :trig represent the trigger pin,
+        :echo represent the echo pin,
+        :signal_time represent the time for each signal burst to be sent.
     '''
     def __init__(self, trig, echo, signal_time):
         self.trig = trig
@@ -26,10 +26,12 @@ class UltrasonicSensor():
     def trigger_low(self):
         GPIO.output(self.trig, GPIO.LOW)
 
-    ''' Sends a high and a low signal from the trigger pin,
-         at a certaion interval set by the signal_time
-    '''
     def send_signal(self):
+
+        ''' Sends a high and a low signal from the trigger pin,
+            at a certain interval set by the signal_time.
+        '''
+
         self.trigger_high()
         time.sleep(self.signal_time)
         self.trigger_low()
@@ -51,6 +53,12 @@ class UltrasonicSensor():
 
     #Gets the signal duration and call calculate distacne function retuning the distance
     def distance(self):
+
+        ''' Calls the :signal_duration() function to get the signal duration and 
+            Calls the :calculate_distance() function that calculates the 
+            disance and sends the response
+        '''
+
         self.signal_duration()
 
         return self.calculate_distance()
