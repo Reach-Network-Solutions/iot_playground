@@ -64,12 +64,14 @@ class UltrasonicSensor():
         return self.calculate_distance()
     
 
-#example use case
-sensor = UltrasonicSensor(21, 20, 0.0005)
+'''
+Example Usage
+'''
+# sensor = UltrasonicSensor(21, 20, 0.0005)
 
-try :
-    while True:
-        sensor.send_signal()
-        print(sensor.distance())
-except KeyboardInterrupt:
-    GPIO.cleanup
+# try :
+#     while True:
+#         sensor.send_signal()
+#         print(sensor.distance())
+# except KeyboardInterrupt:
+#     GPIO.cleanup
