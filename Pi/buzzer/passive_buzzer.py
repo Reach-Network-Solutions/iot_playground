@@ -2,7 +2,8 @@ import RPi.GPIO as GPIO
 from time import sleep
 
 class PassiveBuzzer():
-    ''' pin represent the pin number connected to the pi,
+    ''' Passive BUzzer requires a 50-100PWM frequency 
+        :pin represent the pin number connected to the pi,
         :frequnecy represent the signal frequency,
     '''
     def __init__(self, pin, frequency=50):
