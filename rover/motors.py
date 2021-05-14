@@ -1,12 +1,20 @@
 import RPi.GPIO as gpio
 from time import sleep
+from threading import Thread
 
 class Motor():
-    def __init__(self, leftPin, rightPin, orientation="right"):
+    def __init__(self, leftPin, rightPin, orientation="right", secondMotor=None):
         # The pins are always regarded as left and right respectively  for the motor
         # The right pin should always be connected to the ground NC connection
         # The left pin should always be connected to the live NO connection
         self.orientation = orientation
+
+        #check if the orientation of the second motor is the same as the first motor
+        #raise an exception if it is not
+        self.secondMotor = secondMotor
+        if self.secondMotor and self.secondMotor.orientation==self.orientation:
+            raise Exception("Your secondary motor does not have the same orientation (%s) as the primary motor" % self.orientation)
+
         if orientation == "right":
             self.activePin = rightPin
             self.groundPin = leftPin
@@ -39,10 +47,7 @@ class Motor():
         self.off(self.groundPin)
         # Turn on active PIN
         self.on(self.activePin)
-        sleep(5)
-        # Turn off every PIN
-        self.off(self.groundPin)
-        self.off(self.activePin)
+        
 
     # Inverts the PINs to reverse the current
     def move_backward(self):
@@ -51,15 +56,22 @@ class Motor():
         self.off(self.activePin)
         # Turn on ground PIN
         self.on(self.groundPin)
-        sleep(5)
-        #Turn off everything 
-        self.off(self.activePin)
-        self.off(self.groundPin)
+    
+    def forward(self):
+        self.move_forward()
+        if self.secondMotor:
+            self.secondMotor.move_forward()
+    
+    def backward(self):
+        self.move_backward()
+        if self.secondMotor:
+            self.secondMotor.move_backward()
+    
         
 
-motor = Motor(21, 20, "right")
-motor.move_forward()
-sleep(3)
-motor.move_backward()
+# motor = Motor(21, 20, "right")
+# motor.move_forward()
+# sleep(3)
+# motor.move_backward()
 
-gpio.cleanup()
+# gpio.cleanup()
