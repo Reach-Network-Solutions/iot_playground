@@ -65,11 +65,10 @@ class UltrasonicSensor():
     
 
 #example use case
-sensor = UltrasonicSensor(21, 20, 0.0005)
-
-try :
-    while True:
-        sensor.send_signal()
-        print(sensor.distance())
-except KeyboardInterrupt:
-    GPIO.cleanup
+# sensor = UltrasonicSensor(21, 20, 0.0005)
+# try :
+#     while True:
+#         sensor.send_signal()
+#         print(sensor.distance())
+# except KeyboardInterrupt:
+#     GPIO.cleanup
