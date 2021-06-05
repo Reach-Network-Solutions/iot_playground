@@ -12,7 +12,7 @@ class Motor():
         #check if the orientation of the second motor is the same as the first motor
         #raise an exception if it is not
         self.secondMotor = secondMotor
-        if self.secondMotor and self.secondMotor.orientation==self.orientation:
+        if self.secondMotor and self.secondMotor.orientation!=self.orientation:
             raise Exception("Your secondary motor does not have the same orientation (%s) as the primary motor" % self.orientation)
 
         if orientation == "right":
